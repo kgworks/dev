@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="ja">
+<!--
+Copyright (c) 2000-2005 PeopleSoft, Inc.  All Rights Reserved.
+Safari/537.36 ToolsRel:8.47.02 Portal Target URL: http%3A%2F%2Fnec-lavie.jp%2Fpsc%2FCR121%2FSHOP%2FCRMLV%2Fs%2FWEBLIB_NECD_OCF.ISCRIPT1.FieldFormula.IScript_OrderCompletion-->
+<head>
+<link href="/navigate/common/css/1609common.css" rel="stylesheet" type="text/css">
+<link href="/navigate/common/css/slick.css" rel="stylesheet" type="text/css">
+<link href="/navigate/common/css/1609header.css" rel="stylesheet" type="text/css">
+<link href="/navigate/common/css/1609shopping_header.css" rel="stylesheet" type="text/css">
+<link href="/navigate/common/css/1609footer.css" rel="stylesheet" type="text/css">
+<link href='https://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<script type="text/javascript" language='JavaScript'>
+<!--
+var  totalTimeoutMilliseconds = 1140000; 
+var  warningTimeoutMilliseconds = 1020000; 
+var timeOutURL = "/psp/PA121/?cmd=expire";
+var timeoutWarningPageURL = "/psp/PA121/SHOP/CRMLV/s/WEBLIB_TIMEOUT.PT_TIMEOUTWARNING.FieldFormula.IScript_TIMEOUTWARNING";
+//-->
+</script>
+
+<script type="text/javascript" language='JavaScript'>
+<!--
+//  %Copyright
+//  ToolsRel: %Toolsrel
+
+document.props = new Object();
+document.props.location = document.location.href;
+document.props.domain = document.domain;
+
+function saveWarning(frameName,form,target,url)
+{
+var changed=null;
+
+if (form)
+  changed = checkFormChanged(form, null);
+
+if (changed==null && top.frames && frameName.length>0 )
+{
+  objFrame = top.frames[frameName];
+  if (objFrame)
+    changed=checkFrameChanged(objFrame);
+}
+
+if ((changed==null) && top.frames)
+  changed = checkAnyFrameChanged(top.frames);
+
+var rtn = true;
+if (changed)
+  rtn = !confirm("%Message(124,202,You have unsaved data on this page. Click OK to go back and save the information, or Cancel to continue.)");
+
+if (!url)
+  return rtn;           
+
+if (rtn)
+  open(url, target)
+
+}
+
+function setAnchorAndFocus(link) 
+{
+setAnchor(link);
+
+var obj = document.anchors[link];
+if (obj == null && document.getElementById) 
+    obj=document.getElementById(link);
+if (obj != null)
+    tryFocus(obj);
+} 
+
+
+function setAnchor(link) 
+{
+var obj = document.anchors[link];
+if (obj == null && document.getElementById) 
+    obj=document.getElementById(link);
+
+if (obj!=null && typeof obj == 'object')
+    {
+    if (obj.scrollIntoView) 
+        obj.scrollIntoView();
+    else 
+        
+        
+        
+        
+        if (document.location.hash != ("#" + link) && document.location.hash != link) 
+            document.location.href = "#"+link;
+    }
+}                
+
+function checkAnyFrameChanged(frames)
+{
+for (var j=0; j < frames.length; ++j)
+{
+  var objFrame = frames[j];
+  if (checkFrameChanged(objFrame))
+    return true;
+  
+  if ((!isCrossDomain(objFrame)) && (objFrame.frames))
+    if (checkAnyFrameChanged(objFrame.frames))
+      return true;
+}
+}
+
+function checkFrameChanged(objFrame)
+{
+if (isCrossDomain(objFrame))
+  return null;
+
+var objForms = objFrame.document.forms;
+if (!objForms)
+  return null;
+
+var retval = null;
+for (var i=0; i < objForms.length; i++)
+{
+  var change = checkFormChanged(objForms[i], objFrame);
+  if (change != null)
+  {
+    if (change)
+      return true;
+    retval = change;
+  }
+}
+return retval;
+}
+
+function checkFormChanged(form, objFrame)
+{
+if (!form.ICChanged)
+  return null;          
+if (form.ICChanged.value == "-1")
+  return false;        
+if (form.ICChanged.value == "1")
+  return true;          
+for (var j = 0; j < form.length; ++j)
+{
+  if (isChanged(form.elements[j], objFrame))
+     return true;
+}
+return false;
+}
+
+function ignoreChg(obj, objFrame){
+  if (obj.getAttribute == null){
+    var ignoreChgElem = null; 
+    
+    if (objFrame != null){
+      ignoreChgElem = objFrame.ignoreChgElem;
+    }
+    if (ignoreChgElem == null){
+      return false;
+    }
+    for (var i=0; i<ignoreChgElem.length; i++){
+      if (obj.name == ignoreChgElem[i]){
+        return true;
+      }
+    }
+    return false;
+  }else{
+    return obj.getAttribute("PSnchg");
+  }
+}
+
+function isChanged(obj, objFrame)
+{
+if (obj.type == "checkbox"  || obj.type == "radio")
+  return (obj.checked != obj.defaultChecked) && !ignoreChg(obj, objFrame);
+else if (obj.type == "select-one" && obj.selectedIndex > -1)
+  return !(obj.options[obj.selectedIndex].defaultSelected) && !ignoreChg(obj, objFrame);
+else if (obj.type == "select-multiple")
+{
+  for (var i =0; i < obj.options.length; ++i)
+  {
+     if (obj.options[i].defaultSelected != obj.options[i].selected)
+        return !ignoreChg(obj, objFrame);
+  }
+  return false;
+}
+else if (obj.type == "hidden" || obj.type == "button")
+  return false;
+else
+  return (obj.value != obj.defaultValue) && !ignoreChg(obj, objFrame);
+}
+
+var timeoutWin;
+var timeoutWarningID;
+var timeoutID;
+
+function setupTimeoutMac()  
+{
+window.setTimeout("setupTimeout();", 1000);     
+}
+
+function setupTimeout() 
+{
+if (totalTimeoutMilliseconds != 2073600000)
+{
+  if (!isSessionLoggedout())
+  {
+  window.clearTimeout(timeoutWarningID);
+  window.clearTimeout(timeoutID);
+  timeoutID = window.setTimeout('displayTimeoutMsg()', totalTimeoutMilliseconds);   
+  timeoutWarningID = window.setTimeout('displayTimeoutWarningMsg()', warningTimeoutMilliseconds); 
+  }
+}
+}
+
+function displayTimeoutMsg() 
+{
+timeoutMsg = "%Message(146,93,Your session has been timed out. As a security precaution, sessions are ended after )"
+    + " " + totalTimeoutMilliseconds/60000 + " " + "%Message(146,94, minutes of inactivity. )"; 
+self.location = timeOutURL;   
+}
+
+function displayTimeoutWarningMsg()
+{
+timeoutWinOption = "toolbar=0,location=0,directories=0,status=0,menubar=0,scrollbars=0,resizable=0,width=350,height=300";
+timeoutWin =window.open( timeoutWarningPageURL, "timeoutWarning", timeoutWinOption, true);
+timeoutWin.focus();
+}
+
+function getForm(document,formname)
+{
+var objForms = document.forms;
+if (!objForms)
+  return null;
+
+for (var i=0; i < objForms.length; i++)
+{
+  if (objForms[i].name==formname)
+    return objForms[i];
+}
+return null;
+}
+
+function getLoginCookieValue(cookiename)
+{
+var allcookies;
+allcookies = document.cookie;
+
+if (allcookies == "")
+  return "-1";
+
+var start = allcookies.indexOf(cookiename + '=');
+if (start == -1) return "-1";          
+start += cookiename.length + 1;   
+    
+var end = allcookies.indexOf(';', start);
+if (end == -1) end = allcookies.length;
+var cookieval = allcookies.substring(start, end);
+var a = cookieval.split(' ');
+var winhref=window.location.href;    
+winhref=winhref.toLowerCase();
+for(var i=0; i < a.length; i++)
+{  
+  if (a[i].length>0)
+  {
+    var urlpath = a[i].substring(a[i].indexOf("//"),a[i].lastIndexOf("/"));
+    var pshome = a[i].substring(a[i].lastIndexOf("/"),a[i].length);
+    urlpath = urlpath.toLowerCase();
+    pshome = pshome.toLowerCase();
+    if ((winhref.indexOf(urlpath) !=-1) && (winhref.indexOf(pshome) !=-1))
+       return a[i];
+  }
+}
+return "-1";
+}
+
+function isSessionLoggedout()
+{
+/*
+var val =  getLoginCookieValue("PS_LOGINLIST");
+if (val==-1)
+{
+  self.location=timeOutURL;
+  return true;
+}
+*/
+return false;
+}
+
+function isIE() {
+var isIE = navigator.appVersion.indexOf("MSIE")>0;
+return isIE;
+}
+
+function isMAC() {
+var isMAC = navigator.appVersion.indexOf("Mac")>0;
+return isMAC;
+}
+
+function addExtraParam(saveWarn,frameName,form,target,tgturl,openNewWindowOption)
+{
+  var rtn = true;
+
+  if (saveWarn == "Y")
+  {
+    var changed=null;
+
+    if (form)
+      changed = checkFormChanged(form, null);
+
+    if (changed==null && top.frames && frameName.length>0 )
+    {
+      objFrame = top.frames[frameName];
+      if (objFrame)
+        changed=checkFrameChanged(objFrame);
+    }
+
+    if ((changed==null) && top.frames)
+      changed = checkAnyFrameChanged(top.frames);
+
+    if (changed)
+      rtn = !confirm("%Message(124,202,You have unsaved data on this page. Click OK to go back and save the information, or Cancel to continue.)");
+
+    if (!tgturl)
+      return rtn;           
+  }
+  
+  if (rtn)
+  {
+    var newurl = "";
+    if (typeof URLIntercept == "function"){
+      newurl = URLIntercept(tgturl,target);
+      if (newurl == "") 
+        return;  
+      else
+        tgturl = newurl;  
+      }  
+      // open(tgturl, target);
+      open(tgturl, target, ((target.toLowerCase() == '_blank') ? openNewWindowOption : ''));
+  }
+}
+//-->
+</script>
+
+<script type="text/javascript" language='JavaScript'>
+<!--
+setupTimeout();
+//-->
+</script>
+
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<script type="text/javascript" language="JavaScript">
+   
+ <!--  
+function MM_openBrWindow(theURL,winName,features) { 
+      window.open(theURL,winName,features);
+    } 
+function change_timeOutURL(){
+timeoutWarningPageURL = "/psp/PA121/SHOP/CRMLV/s/WEBLIB_TIMEOUT.PT_TIMEOUTWARNING.FieldFormula.IScript_TIMEOUTWARNING";
+}
+
+setTimeout("change_timeOutURL()", 1000 * 2 );
+   //-->
+</script>
+
+<script type="text/javascript">
+ <!--
+   var login = "Y";
+   var inLoginid = "opttestei";
+ //-->
+</script>
+
+<script type="text/javascript" src="/navigate/direct/tmd/js/script.js">
+</script>
+
+<script type="text/javascript">
+   <!--
+   if(!window.lmd) {
+      window.lmd = {};
+      try {
+         window.lmd.purchase = {}; 
+         window.lmd.purchase.orderID = "011200311396609"; 
+         window.lmd.purchase.basePrice = 60280; 
+         
+         window.lmd.purchase.totalPrice = 60280; 
+         window.lmd.purchase.shipping = 0; 
+         window.lmd.purchase.shippingMethod = "Standard shipping"; 
+         window.lmd.purchase.paymentMethod = "Bank Transfer"; 
+         window.lmd.purchase.tax = 5480; 
+         window.lmd.purchase.shippingZip = "102-0081"; 
+         window.lmd.purchase.shippingCountry = "Japan"; 
+         window.lmd.purchase.billingZip = "102-0081"; 
+         window.lmd.purchase.billingCountry = "Japan"; 
+         window.lmd.purchase.allProducts = {}; 
+         window.lmd.purchase.allProducts[1] = {}; 
+         window.lmd.purchase.allProducts[1].productID = "PC-GN18HQRAF"; 
+         window.lmd.purchase.allProducts[1].quantity = 1; 
+         window.lmd.purchase.allProducts[1].price = 54800; 
+         window.lmd.purchase.allProducts[1].tax = 5480; 
+         window.lmd.purchase.allProducts[1].shippingPrice = 0; 
+         window.lmd.purchase.event = {}; 
+         window.lmd.purchase.event.name = "Purchase"; 
+         
+      }
+      catch(lmderror) {
+         console.warn(lmderror);
+      }
+   }
+   //-->
+</script>
+
+<link href="/shop/cart/css/index.css" rel="stylesheet" type="text/css">
+<link href="/shop/cart/css/cart.css" rel="stylesheet" type="text/css">
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, minimum-scale=0.3, initial-scale=1, maximum-scale=2">
+<style type="text/css">
+ iframe { display:none; }
+</style>
+
+<script src="/navigate/common/js/jquery.js" type="text/javascript">
+</script>
+
+<script src="/navigate/common/js/jquery.gsap.min.js" type="text/javascript">
+</script>
+
+<script type="text/javascript" src="/navigate/common/js/jquery.scrolldepth.js">
+</script>
+
+<script src="/navigate/common/js/TweenMax.min.js" type="text/javascript">
+</script>
+
+<script src="/navigate/common/js/slick.js" type="text/javascript">
+</script>
+
+<script src="/navigate/common/js/1609common.js" type="text/javascript">
+</script>
+
+<script src="/navigate/common/js/utils.js" type="text/javascript">
+</script>
+
+<script src="/navigate/common/js/1609shopping_header.js" type="text/javascript">
+</script>
+
+<script src="/navigate/common/js/1609footer.js" type="text/javascript">
+</script>
+
+<script src="/navigate/common/js/shopping_snsbtn.js" type="text/javascript">
+</script>
+
+<script src="/shop/js/gtm.js" type="text/javascript">
+</script>
+
+<script src="/navigate/common/js/direct_price.js" type="text/javascript">
+</script>
+
+<script type="text/javascript" src="//r3.snva.jp/javascripts/reco/2/sna.js?k=qkbb8IssDXnkp">
+</script>
+
+<meta name="generator" content="HTML Tidy, see www.w3.org">
+<title>注文完了 | NEC Direct</title>
+</head>
+<body>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<tr>
+<td><!--Begin pagelet: UniversalNavigation URL: http%3A%2F%2Fnec-lavie.jp%2Fpsc%2FPA121%2FSHOP%2FENTPLV%2Fs%2FWEBLIB_PORTAL.PORTAL_HOMEPAGE.FieldFormula.IScript_HPDefaultHdr--><span>
+<script type="text/javascript">
+     <!--
+     if (typeof login === "undefined") {
+       var login = "N";
+     }
+     var PageURL = location.href;
+     var boo = "0";
+     if (PageURL.indexOf('RE_SUMMARY.GBL') != -1) {
+       if (PageURL.indexOf('NECS_RE_QUOTE') != -1) {
+         if (PageURL.indexOf('MES') != -1) {
+           boo = "1";
+         }else{
+           document.title = "御見積書 | NEC Direct";
+           boo = "0";
+           login = "Y";
+         }          
+       }else{
+         boo = "1";
+       }
+     }else{
+       if (PageURL.indexOf('RE_STATUS.GBL') != -1){
+         boo = "1";
+       }else{
+         boo = "0";
+       }
+     }
+    
+     if (boo == "0") {
+       if(!window.lmd) {
+         window.lmd = {};
+       }
+       try {
+         window.lmd.bu = "NEC Direct";
+         window.lmd.cc = "JP";
+         window.lmd.country = "Japan";
+         window.lmd.currency = "JPY";
+         window.lmd.currencycode = "JPY";
+         window.lmd.language = "Ja";
+         window.lmd.pageName = document.title;
+         window.lmd.pagePath = location.href;
+         window.lmd.PageTitle = document.title;
+         window.lmd.storeID = "nec/web";
+         window.lmd.storeType = "NEC Direct";
+         window.lmd.title = document.title;
+
+         if (login == "Y"){
+           window.lmd.loginInfo = {};
+           window.lmd.loginInfo.loginStatus = "logged in";
+           window.lmd.loginInfo.id = inLoginid;
+         }
+
+       } catch(lmderror) {
+         console.warn(lmderror);
+       }
+     }
+     //-->
+    
+</script>
+
+<script type="text/javascript" src="//assets.adobedtm.com/9f0b01d01b963414024fff848ca9d3750437e1fa/satelliteLib-ce06f339e854781efdf01c8236d72d007c870956.js">
+</script>
+
+<div id="header5">
+<div id="header_block1">
+<div class="contents_wrap">
+<div class="content">
+<div class="logo_121ware"><a href="http://nec-lavie.jp/" target="_top"><img src="/navigate/common/images/lavie_logo.svg" width="108" height="26" border="0" alt="NEC LAVIE公式サイト"></a> <span><a href="http://nec-lavie.jp/shop/" target="_top"><img src="/navigate/common/images/direct_logo.png" width="108" height="26" alt="NEC Direct"></a></span></div>
+
+<div id="sp_menu">
+<div id="bizsearch"><img class="grass_icon" src="/navigate/common/images/header_pc_serchicon.png" width="32" height="32" alt=""> 
+
+<form name="AccelaBizSearchASPForm" id="bizsearchAspForm" action="http://search.nec-lavie.jp/shopping/" method="get">
+<div id="srchBtn"><input type="submit" value="検索"></div>
+
+<input type="text" name="q" value="" id="bizsearchAspQuery" autocomplete="off" placeholder="サイト内検索" onfocus="SearchAssistInput();" onblur="SearchAssistGuide()"></form>
+
+<script src="/popterm/popterm2.js" type="text/javascript">
+</script>
+
+ 
+
+<script type="text/javascript">
+                  var p = new popTerm({ 'targetid': 'bizsearchAspQuery', 'css': '/popterm/css/popterm2.css','ssl_css': '/popterm/css/popterm2.css','ssl_url': 'https://necpc.sitesearch.jp/popterm/popterm.pl'});
+                
+</script>
+
+ 
+
+<div class="close"><img class="line1" src="/navigate/common/images/sp_menubtn_border.png" width="26" height="2" alt=""> <img class="line2" src="/navigate/common/images/sp_menubtn_border.png" width="26" height="2" alt=""></div>
+</div>
+
+<!--bizsearch-->
+<div class="navi">
+<ul id="header5menu" class="clearfix">
+<li class="products" title="製品情報"><a href="http://nec-lavie.jp/" target="_top"><span>製品情報</span></a></li>
+
+<li class="shopping active" title="ショッピング"><a href="http://nec-lavie.jp/shop/" target="_top"><span>ショッピング</span></a></li>
+
+<li class="support " title="サービス＆サポート"><a href="http://121ware.com/psp/PA121/NECS_SUPPORT_SITE/ENTP/s/WEBLIB_NECS_SP.NECS_SP_TAB.FieldFormula.IScript_Display_Tab" target="_top"><span>サービス＆サポート</span></a></li>
+
+<li class="mypage" title="マイページ"><a href="http://121ware.com/psp/PA121/NECS_MY_ACCOUNT/ENTP/s/WEBLIB_NECS_MYA.NECS_MYACC.FieldFormula.IScript_Switch_Tab" target="_top"><span>マイページ</span></a></li>
+</ul>
+</div>
+
+<!--navi--></div>
+
+<!--sp_menu-->
+<div class="search_show_btn pc_only"><img src="/navigate/common/images/sarch_grass.png" width="36" height="36" alt=""></div>
+
+<div class="guide_show_btn pc_only"><a href="/shop/info/guide/index.html" target="_blank"></a></div>
+
+<div class="cart_show_btn pc_only"><a href="http://nec-lavie.jp/psp/PA121/SHOP/CRMLV/c/RE_ORDER_CAPTURE.RO_ADD.GBL?PAGE=RO_ADD">カートを見る</a></div>
+
+<div id="barger_btn" class="sp_only"><img class="close" src="/navigate/common/images/sp_menubtn_close.png" width="70" height="65" alt="CLOSE"> <img class="open" src="/navigate/common/images/sp_menubtn_open.png" width="70" height="65" alt="MENU"> 
+
+<div class="border1"><img src="/navigate/common/images/sp_menubtn_border.png" width="70" height="4" alt="イメージ"></div>
+
+<div class="border2"><img src="/navigate/common/images/sp_menubtn_border.png" width="70" height="4" alt="イメージ"></div>
+
+<div class="border3"><img src="/navigate/common/images/sp_menubtn_border.png" width="70" height="4" alt="イメージ"></div>
+</div>
+
+<!--barger_btn-->
+<div class="nec_logo"><a href="http://jpn.nec.com/" target="_blank"><img src="/navigate/common/images/hd_nec_logo.png" width="51" height="14" border="0" alt="NEC"></a></div>
+</div>
+
+<!--content--></div>
+
+<!--contents_wrap--></div>
+
+<!--header_block1-->
+<div id="header_block2">
+<div class="product_menu contents_wrap">
+<div class="content">
+<ul class="sec_menu clearfix">
+<li class="lineup"><span class="text">お取扱商品</span><span class="border"><img src="/navigate/common/images/sndmenu_v_line.png" width="1" height="27" alt=""></span></li>
+</ul>
+</div>
+
+<!--content--></div>
+
+<!--contents_wrap--></div>
+
+<!--header_block2-->
+<div id="go_top"><img src="/navigate/common/images/201609gotop.png" width="50" height="50" alt="go top"></div>
+</div>
+
+<!--header5-->
+<div id="PostRedir" style="visibility:hidden;"><span style="display:none">◯</span></div>
+</span><!--End pagelet: UniversalNavigation --></td>
+</tr>
+
+<tr>
+<td align="CENTER"><!--Begin target: TargetContent URL: http%3A%2F%2Fnec-lavie.jp%2Fpsc%2FCR121%2FSHOP%2FCRMLV%2Fs%2FWEBLIB_NECD_OCF.ISCRIPT1.FieldFormula.IScript_OrderCompletion--><span><!--===== 追加CSS・JS======--><!-- 共通CSS・JS-->
+<script src="/shop/cart/js/index.js" type="text/javascript">
+</script>
+
+<!--===== 追加CSS・JS ここまで======--><!--LOADING-->
+<div id="loading">
+<div class="center">
+<div class="circle"><span style="display:none">◯</span></div>
+
+<div class="text">読み込み中…</div>
+</div>
+</div>
+
+<!--LOADING END-->
+<div id="config-contents" class="CartComplete">
+<div id="local" class="show-alert">
+<ul>
+<li>ショッピングカート</li>
+
+<li>ログイン</li>
+
+<li>ご注文情報の入力</li>
+
+<li>ご注文内容の確認</li>
+
+<li class="active">ご注文完了</li>
+</ul>
+</div>
+
+<div id="config-body">
+<div class="cart-contents">
+<div id="hero">
+<h1><b>ご注文ありがとうございました</b></h1>
+</div>
+
+<div class="division" id="">
+<div id="cart_ordercomplete">
+<p class="notice-txt">このページには重要なお知らせを含んでおります。いま一度、<span class="underline">内容を最後までご確認くださいますよう</span>お願いいたします。</p>
+
+<table id="order-number">
+<tbody><!--product01-->
+<tr class="">
+<th>NEC Direct 注文番号(ご注文番号)</th>
+<td class="num">011200311396609</td>
+</tr>
+
+<!--product01 END--></tbody>
+</table>
+
+<div class="order-att">
+<ul class="sosumi">
+<li>NEC Direct 注文番号(ご注文番号)は、ご注文内容確認の際の大切な番号となりますので必ずお控えください。</li>
+</ul>
+</div>
+
+<h3>ご注文内容（控え）</h3>
+
+<table id="table-order-info" class="table-cart">
+<thead>
+<tr>
+<th>品名</th>
+<th>単価（税別）</th>
+<th>数量</th>
+<th>金額（税別）</th>
+</tr>
+</thead>
+
+<tbody>
+<tr class="selected-product">
+<td data-label="品名">
+<h4>ＬＡＶＩＥ　Ｄｉｒｅｃｔ　ＮＳ（Ａ）</h4>
+
+<div class="description_area"><span><strong>内訳</strong></span><br>
+<ul>
+<li>・パソコン (PC-GN18HQRAF）</li>
+
+<li>・４ＧＢ　メモリ (PC-F-MEE4DC)</li>
+
+<li>・約５００ＧＢ　ＨＤＤ (PC-F-1HB50R)</li>
+
+<li>・１年間保証 (PC-F-SU1EM5)</li>
+</ul>
+</div>
+
+<div class="btn_area"><a href="http://nec-lavie.jp/psp/PA121/SHOPX/CRMLV/s/WEBLIB_PC_SPEC.ISCRIPT1.FieldFormula.IScript_PC_SPEC?prodID=PC-GN18HQRAF%2c%27PC-F-MEE4DC%27%2c%27PC-F-1HB50R%27%2c%27PC-F-SU1EM5" class="button2 back blink" target="_blank">構成確認<i><span style="display:none">◯</span></i></a></div>
+</td>
+<td data-label="単価（税別）" class="price">¥54,800</td>
+<td data-label="数量">1</td>
+<td data-label="金額（税別）">¥54,800</td>
+</tr>
+</tbody>
+</table>
+
+<div id="cart_bottom_contents" class="clearfix">
+<div class="info_area left side">
+<ul class="sosumi">
+<li>印刷時には印刷の向きを横に指定してから印刷してください。</li>
+
+<li>獲得予定ポイントの加算時期については<a href="/shop/info/guide/point/index.html" target="guide" onclick="GuideOW('/shop/info/guide/point/index.html'); return false">ご利用ガイド</a>をご覧ください。</li>
+</ul>
+</div>
+
+<div class="right side">
+<div class="amount_area">
+<dl class="breakdown">
+<dt>商品合計：</dt>
+
+<dd>¥54,800</dd>
+
+<dt>送料：</dt>
+
+<dd>¥0</dd>
+
+<dt>小計：</dt>
+
+<dd>¥54,800</dd>
+
+<dt>消費税（10%)：</dt>
+
+<dd>¥5,480</dd>
+
+<dt>合計金額：</dt>
+
+<dd>¥60,280</dd>
+</dl>
+
+<dl class="total">
+<dt>お支払総額：</dt>
+
+<dd>¥60,280</dd>
+</dl>
+
+<dl class="point">
+<dt>獲得予定ポイント(pt) :</dt>
+
+<dd>0pt</dd>
+</dl>
+</div>
+</div>
+</div>
+</div>
+
+<div id="customerInfo" class="customerInfo">
+<h3>お客様情報</h3>
+
+<h4>お客様情報</h4>
+
+<table id="confirm_customerinfo01" class="table_customerinfo">
+<tbody><!--info04-->
+<tr class="">
+<th>フリガナ</th>
+<td>オプト テスト</td>
+</tr>
+
+<!--info04 END--><!--info05-->
+<tr class="">
+<th>お名前</th>
+<td>オプト テスト</td>
+</tr>
+
+<!--info05 END--><!--info06-->
+<tr class="">
+<th>郵便番号</th>
+<td>102-0081</td>
+</tr>
+
+<!--info06 END--><!--info07-->
+<tr class="">
+<th>ご住所</th>
+<td>東京都千代田区四番町</td>
+</tr>
+
+<!--info07 END--><!--info08-->
+<tr class="">
+<th>お電話番号</th>
+<td>03-1234-5678</td>
+</tr>
+
+<!--info08 END--><!--info09-->
+<tr class="">
+<th>FAX番号</th>
+<td></td>
+</tr>
+
+<!--info09 END--><!--info10-->
+<tr class="">
+<th>E-mailアドレス</th>
+<td>k.miyakawa@opt.ne.jp</td>
+</tr>
+
+<!--info10 END--><!--info11-->
+<tr class="">
+<th>平日ご連絡先</th>
+<td>0311110000</td>
+</tr>
+
+<!--info11 END--></tbody>
+</table>
+
+<h4>商品のお届け先</h4>
+
+<table id="confirm_customerinfo02" class="table_customerinfo">
+<tbody><!--info03-->
+<tr class="">
+<th>フリガナ</th>
+<td>オプト テスト</td>
+</tr>
+
+<!--info03 END--><!--info04-->
+<tr class="">
+<th>お名前</th>
+<td>オプト テスト</td>
+</tr>
+
+<!--info04 END--><!--info05-->
+<tr class="">
+<th>郵便番号</th>
+<td>102-0081</td>
+</tr>
+
+<!--info05 END--><!--info06-->
+<tr class="">
+<th>ご住所</th>
+<td>東京都千代田区四番町</td>
+</tr>
+
+<!--info06 END--><!--info07-->
+<tr class="">
+<th>お電話番号</th>
+<td>03-1234-5678</td>
+</tr>
+
+<!--info07 END--><!--info08-->
+<tr class="">
+<th>お届け希望日</th>
+<td>指定なし（最短でお届け）</td>
+</tr>
+
+<!--info08 END--><!--info09-->
+<tr class="">
+<th>お届け希望時間帯</th>
+<td>指定なし</td>
+</tr>
+
+<!--info09 END--><!--info10-->
+<tr class="">
+<th>お届け状況通知のご希望</th>
+<td>いいえ</td>
+</tr>
+
+<!--info10 END--></tbody>
+</table>
+</div>
+
+<div id="payment">
+<h3>お支払方法</h3>
+
+<div id="payment_area_confirm">
+<table id="confirm_payment" class="table-payment-area">
+<tbody>
+<tr class="">
+<th>お支払方法</th>
+<td>銀行振込</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="payment_sammary">
+<h4>銀行振込を選択されたお客様</h4>
+
+<p class="deadline_cotification">商品の注文から7日以内に下記口座へ代金のお振込みをお願いいたします。</p>
+
+<div class="amount_area2">
+<dl class="breakdown">
+<dt>銀行名</dt>
+
+<dd>三井住友銀行東京第一支店</dd>
+
+<dt>口座番号</dt>
+
+<dd>普通 3664997</dd>
+
+<dt>口座名</dt>
+
+<dd>NECパーソナルコンピュータ（株）</dd>
+</dl>
+
+<dl class="total">
+<dt>お支払総額</dt>
+
+<dd>¥60,280</dd>
+</dl>
+</div>
+
+<ul class="sosumi">
+<li>お振込手数料はお客様のご負担となります。</li>
+
+<li>ご注文ごとに振込先の口座番号が異なりますのでご注意ください。</li>
+
+<li>お振込元名は、お客様のお名前（法人の場合は法人名）でお振り込みください。</li>
+
+<li>ご入金をNECパーソナルコンピュータ株式会社が確認した時点でご契約の成立となります。</li>
+</ul>
+
+<div class="address">〒101-0021　<span>東京都千代田区外神田</span><br>
+<span>四丁目14番1号 秋葉原UDX</span><br>
+NECパーソナルコンピュータ株式会社<br>
+TEL（フリーコール）：0120-944-500</div>
+</div>
+
+<div class="order-common-info">
+<ul class="sosumi">
+<li>NEC Directでご購入いただきましたカスタマイズモデルのパソコン本体（LAVIE Direct[ノート/デスクトップ]）、セット商品につきましては、お客様への商品お届けの確認が取れ次第、保有商品として自動的に登録されます。マイページの「保有商品情報」→「保有商品情報一覧」にてご確認いただけます。</li>
+
+<li>Mate J/VersaPro Jや店頭標準商品、アウトレット商品につきましては、マイページの「保有商品情報」→「保有商品情報の新規登録」からご登録いただけます。</li>
+</ul>
+</div>
+
+<iframe src="/shop/cart/iframes/cart_promotion_01.html" id="iframe-cart_promotion_01" class="reloaded" allowfullscreen="" scrolling="no" width="100%" height="0" frameborder="0" style="display:block"><span style="display:none">◯</span></iframe> <iframe src="/shop/cart/iframes/cart_promotion_02.html" id="iframe-cart_promotion_02" class="reloaded" allowfullscreen="" scrolling="no" width="100%" height="0" frameborder="0" style="display:block"><span style="display:none">◯</span></iframe></div>
+</div>
+</div>
+</div>
+
+<div id="sc_channel" style="display:none;">Thanks</div>
+
+<div id="sc_events" style="display:none;">purchase,event11</div>
+
+<div id="sc_evar21" style="display:none;">opttestei</div>
+
+<div id="sc_purchaseid" style="display:none;">011200311396609</div>
+
+<div id="sc_zip" style="display:none;">102-0081</div>
+
+<div id="sc_state" style="display:none;">東京都</div>
+
+<div id="sc_product" style="display:none;">;PC-GN18HQRAF;1;441.94;event11=54800;evar13=</div>
+
+<div id="sc_totalprice" style="display:none;">54800</div>
+
+<script type="text/javascript">
+__snahost = "r3.snva.jp";recoConstructer({k:"qkbb8IssDXnkp",bcon:{heavier:{items:[{id:"PC-GN18HQRAF"}]}}});
+</script>
+
+ 
+
+<script type="text/javascript" language="javascript">
+  var vcEcId="3388586";
+  var vcSalesNumber="1";
+  var vcSalesAmount="54800";
+  var vcOrderId="011200311396609";
+</script>
+
+ 
+
+<script type="text/javascript" src="//cv.valuecommerce.com/vccv.min.js">
+</script>
+
+ 
+
+<noscript><img src="https://itrack2.valuecommerce.ne.jp/cgi-bin/3388586/vc_itag.cgi?type=img&amp;sales_number=1&amp;sales_amount=54800&amp;order_id=011200311396609" width="1" height="1"></noscript>  </div>
+</span><!--End target: TargetContent --></td>
+</tr>
+
+<tr>
+<td><!--Begin pagelet: PoweredByImage URL: http%3A%2F%2Fnec-lavie.jp%2Fpsc%2FPA121%2FSHOP%2FENTPLV%2Fs%2FWEBLIB_PORTAL.PORTAL_HOMEPAGE.FieldFormula.IScript_HPPoweredBy--><span>
+<div class="space10"><br>
+</div>
+
+<div style="margin:1em; font-size:12px; color:#666; font-family:'游ゴシック体', 'Yu Gothic', YuGothic,'ヒラギノ角ゴ Pro W3', 'Hiragino Kaku Gothic Pro', 'メイリオ', Meiryo, Osaka, 'ＭＳ Ｐゴシック', 'MS PGothic', 'sans-serif'">「NEC Direct」は、NECパーソナルコンピュータ株式会社が運営するショッピングサイトです。<br>
+ 「NEC Direct価格」とは、NECパーソナルコンピュータ株式会社が「NEC Direct」を通じて、お客様に販売する場合の販売価格（税別）です。<br>
+ 「獲得予定ポイント」とは、税込価格に対するポイント付与率より算出されるNEC Directポイントです。</div>
+
+<div id="footer5" class="width1200">
+<div id="linkArea2">　　　<!-- 外部フッタファイル領域 --></div>
+
+<div class="footer_main clearfix">
+<div class="clearfix">
+<div class="sns clearfix"><a class="facebook btn" href="" onclick="window.open(this.href, 'FBwindow', 'width=650, height=450, menubar=no, toolbar=no, scrollbars=yes'); return false;"><img src="/products/common/images/navigate/snsbtn_facebook.png" width="34" height="34" alt="facebook&quot;&quot;" target="_blank"></a> <a class="twitter btn" href="" onclick="window.open(this.href, 'tweetwindow', 'width=550, height=450,personalbar=0,toolbar=0,scrollbars=1,resizable=1'); return false;"><img src="/products/common/images/navigate/snsbtn_twitter.png" width="34" height="34" alt="twitter"></a> <a class="gplus btn" href="" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"><img src="/products/common/images/navigate/snsbtn_gplus.png" width="34" height="34" alt=""></a> <a href="" class="hatena-bookmark-button" data-hatena-bookmark-layout="simple" title=""><img src="/products/common/images/navigate/snsbtn_hatena.png" width="34" height="34" alt="はてなブックマークに追加"></a> 
+
+<script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async">
+</script>
+
+ <a href="javascript:void(0);" onclick="" class="mixi btn"><img src="/products/common/images/navigate/snsbtn_mixi.png" width="34" height="34" alt=""></a></div>
+
+<div class="ft_home" title="ホーム"><a href="http://nec-lavie.jp/" target="">ホーム</a></div>
+
+<div class="ft_condition" title="ご利用規約"><a href="http://nec-lavie.jp/navigate/common/agreement/" target="_blank">ご利用規約</a></div>
+
+<div class="ft_privacy" title="個人情報ポリシー"><a href="http://nec-lavie.jp/privacy/" target="_blank">個人情報ポリシー</a></div>
+
+<div class="ft_inquiry" title="お問い合わせ"><a href="http://nec-lavie.jp/faq/" target="_blank">お問い合わせ</a></div>
+
+<div class="ft_copyright">
+<script type="text/javascript">
+document.write("Copyright&copy; NEC Personal Computers, Ltd. 2011-"+new Date().getFullYear()+".");
+</script>
+</div>
+</div>
+</div>
+</div>
+
+<!--/foter5-->
+<script type="text/javascript">
+if(typeof _satellite !== "undefined")_satellite.pageBottom();
+</script>
+
+<script language="JavaScript" type="text/javascript" src="/js/s_ctph.js">
+</script>
+
+<script type="text/javascript">
+    $(function() {
+        $('#linkArea2').load('/include/footer05.html');
+    });
+    
+</script>
+</span><!--End pagelet: PoweredByImage --></td>
+</tr>
+</table>
+</body>
+</html>
+
